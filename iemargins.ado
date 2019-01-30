@@ -3,8 +3,14 @@
 cap prog drop iemargins
 prog def iemargins
 
-syntax varlist , Treatment(varname fv) [Controls(varlist ts fv)] ///
-  [GRAPHoptions(string asis)] [*]
+version 13.1
+
+syntax varlist , ///
+  Treatment(varname)                    /// Treatment variable - must be categorical
+  [Controls(varlist ts fv)]             /// Control variables - no restrictions
+  [GRAPHoptions(string asis)]           /// Graph options - must use marginsplot styles in here
+  [*]                                   /// Regression options
+
 
 // Run the regressions
 local x = 1
@@ -17,19 +23,23 @@ qui foreach var in `varlist' {
   local theLetter : word `x' of `c(alpha)'
 
   // Regression and margins
-  reg `var' `treatment' `control' , `options'
+  reg `var' i.`treatment' `control' , `options'
     margins `treatment'
-    marginsplot , nodraw saving(`theLetter', replace) ///
-      recast(bar) title("`theLabel'") `graphoptions'
+    marginsplot , yscale(r(0)) ytit(" ")  ///
+      nodraw saving(`theLetter', replace) ///
+      recast(bar) title("`theLabel'") `graphoptions' ///
 
   // Housekeeping
   local ++x
-  local theGraphs " `theGraphs'`theLetter'.gph  "
+  local theGraphs "`theGraphs' `theLetter'.gph"
 
 }
 
 // Build the final graph
-graph combine `theGraphs' , ycom
+graph combine `theGraphs' , ycom graphregion(color(white))
+
+// Cleanup
+!rm `theGraphs'
 
 // End
 end
