@@ -5,11 +5,12 @@ prog def iemargins
 
 version 13.1
 
-syntax varlist , ///
+syntax varlist [if] [in] [aw fw pw iw], ///
   Treatment(varname)                    /// Treatment variable - must be categorical
   [Controls(varlist ts fv)]             /// Control variables - no restrictions
   [GRAPHoptions(string asis)]           /// Graph options - must use marginsplot styles in here
   [ycom]                                /// Force y-axis to be the same for all outcomes
+  [Level(real 95)]                      /// Adjust confidence level
   [*]                                   /// Regression options
 
 
@@ -24,9 +25,9 @@ qui foreach var in `varlist' {
   local theLetter : word `x' of `c(alpha)'
 
   // Regression and margins
-  reg `var' i.`treatment' `control' , `options'
-    margins `treatment'
-    marginsplot , yscale(r(0)) ytit(" ")  ///
+  reg `var' i.`treatment' `control' [`weight'`exp'], `options'
+    margins `treatment' , l(`level')
+    marginsplot , yscale(r(0)) ylab(0) ylab(#6) ytit(" ")  ///
       nodraw saving(`theLetter', replace) ///
       recast(bar) title("`theLabel'") `graphoptions' ///
 

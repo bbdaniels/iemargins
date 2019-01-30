@@ -11,17 +11,19 @@ help for {hi:iemargins}
 {title:Syntax}
 
 {p 4 6 }
-{cmdab:iemargins} {it:dependent_variable_list} {break}{p_end}
+{cmdab:iemargins} {it:dependent_variable_list}
+[{help if}] [{help in}] [{help weight}]{break}{p_end}
 {p 4 6 }
   , {opth t:reatment(varname)} {break}
   [{opth c:ontrols(varlist)}] {break}
-  [ycom] {break}
+  [{opt ycom}] [{opt l:evel(#)}]{break}
   [{opt graph:options(list_of_options)}] {break}
   [{help regress:regress_options}]
 
 {pstd}The {bf:treatment()} variable must be categorical,
 and can have as many groups as you like. {break}
 The {bf:ycom} option forces all outcomes onto the same y-axis.{break}
+The {bf:level()} option sets the confidence level (default is 95%).{break}
 The {bf:graphoptions()} option accepts both {help twoway_options:twoway}
 and {help marginsplot} styling options.{p_end}
 
