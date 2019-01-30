@@ -6,7 +6,7 @@ help for {hi:iemargins}
 
 {title:Title}
 
-{phang}{cmdab:iemargins} {hline 2} Plots estimated marginal levels of outcome variables across treatmtent groups.
+{phang}{cmdab:iemargins} {hline 2} Plots estimated marginal levels of outcome variables across treatment groups.
 
 {title:Syntax}
 
