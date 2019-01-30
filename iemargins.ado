@@ -25,7 +25,7 @@ qui foreach var in `varlist' {
   local theLetter : word `x' of `c(alpha)'
 
   // Regression and margins
-  reg `var' i.`treatment' `control' [`weight'`exp'], `options'
+  reg `var' i.`treatment' `control' `if' `in' [`weight'`exp'], `options'
     margins `treatment' , l(`level')
     marginsplot , yscale(r(0)) ylab(0) ylab(#6) ytit(" ")  ///
       nodraw saving(`theLetter', replace) ///
