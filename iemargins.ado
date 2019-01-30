@@ -9,6 +9,7 @@ syntax varlist , ///
   Treatment(varname)                    /// Treatment variable - must be categorical
   [Controls(varlist ts fv)]             /// Control variables - no restrictions
   [GRAPHoptions(string asis)]           /// Graph options - must use marginsplot styles in here
+  [ycom]                                /// Force y-axis to be the same for all outcomes
   [*]                                   /// Regression options
 
 
@@ -36,7 +37,7 @@ qui foreach var in `varlist' {
 }
 
 // Build the final graph
-graph combine `theGraphs' , ycom graphregion(color(white))
+graph combine `theGraphs' , `ycom' graphregion(color(white))
 
 // Cleanup
 !rm `theGraphs'
