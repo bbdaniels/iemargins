@@ -25,10 +25,16 @@ qui foreach var in `varlist' {
   // Get an alphabetical index
   local theLetter : word `x' of `c(alpha)'
 
+  // Check for horizontal graphs
+  local y "y"
+  if regexm("`graphoptions'","horiz") {
+    local y "x"
+  }
+
   // Regression and margins
   reg `var' i.`treatment' `controls' `if' `in' [`weight'`exp'], `options'
     margins `treatment' , l(`level')
-    marginsplot , yscale(r(0)) ylab(0) ylab(#6) ytit(" ")  ///
+    marginsplot , `y'scale(r(0)) `y'lab(0) `y'lab(#6) `y'tit(" ")  ///
       nodraw saving(`theLetter', replace) ///
       recast(bar) title("`theLabel'") `graphoptions' ///
 
