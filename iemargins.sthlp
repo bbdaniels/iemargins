@@ -18,6 +18,7 @@ help for {hi:iemargins}
   [{opth c:ontrols(varlist)}] {break}
   [{opt ycom}] [{opt l:evel(#)}]{break}
   [{opt graph:options(list_of_options)}] {break}
+  [{opt comb:ine(list_of_options)}] {break}
   [{help regress:regress_options}]
 
 {pstd}The {bf:treatment()} variable must be categorical,
@@ -26,6 +27,7 @@ The {bf:ycom} option forces all outcomes onto the same y-axis.{break}
 The {bf:level()} option sets the confidence level (default is 95%).{break}
 The {bf:graphoptions()} option accepts both {help twoway_options:twoway}
 and {help marginsplot} styling options.{p_end}
+The {bf:combine()} option passes options to the {bf:graph combine} command.{break}
 
 {marker desc}
 {title:Description}

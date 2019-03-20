@@ -9,6 +9,7 @@ syntax varlist [if] [in] [aw fw pw iw], ///
   Treatment(varname)                    /// Treatment variable - must be categorical
   [Controls(varlist ts fv)]             /// Control variables - no restrictions
   [GRAPHoptions(string asis)]           /// Graph options - must use marginsplot styles in here
+  [COMBine(string asis)]                /// Options for [graph combine]
   [ycom]                                /// Force y-axis to be the same for all outcomes
   [Level(real 95)]                      /// Adjust confidence level
   [*]                                   /// Regression options
@@ -38,7 +39,7 @@ qui foreach var in `varlist' {
 }
 
 // Build the final graph
-graph combine `theGraphs' , `ycom' graphregion(color(white))
+graph combine `theGraphs' , `ycom' `combine' graphregion(color(white))
 
 // Cleanup
 !rm `theGraphs'
